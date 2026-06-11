@@ -181,10 +181,12 @@
     object-fit: cover; object-position: center top;
     transform: scale(1.08) translateZ(0);
     will-change: transform;
-    transition: transform 8s ease;
+    transition: transform 8s ease, opacity 0.5s ease;
     z-index: 0;
+    opacity: 0;
   }
   .hero-bg img.loaded { transform: scale(1.06) translateZ(0); }
+  .hero-bg img.show { opacity: 1; }
   .hero-overlay { z-index: 2; }
   .hero-overlay {
     position: absolute; inset: 0;
@@ -1077,11 +1079,20 @@ const menu = document.getElementById('mobileMenu');
 toggle.addEventListener('click', () => menu.classList.toggle('open'));
 function closeMobile() { menu.classList.remove('open'); }
 
-// Hero image parallax + load
+// Hero image — hidden by default, only shown if video fails
 const heroBg = document.getElementById('heroBg');
+const heroVideo = document.querySelector('.hero-bg video');
 const onHeroLoad = () => requestAnimationFrame(() => heroBg.classList.add('loaded'));
 heroBg.addEventListener('load', onHeroLoad);
 if (heroBg.complete) onHeroLoad();
+if (heroVideo) {
+  heroVideo.addEventListener('error', () => heroBg.classList.add('show'));
+  // Also show fallback if video stalls for 3s with no data
+  const fallbackTimer = setTimeout(() => {
+    if (heroVideo.readyState === 0) heroBg.classList.add('show');
+  }, 3000);
+  heroVideo.addEventListener('loadeddata', () => clearTimeout(fallbackTimer));
+}
 window.addEventListener('scroll', () => {
   const offset = Math.min(window.scrollY * 0.04, window.innerHeight * 0.055);
   heroBg.style.transform = `scale(1.06) translateY(-${offset}px) translateZ(0)`;
