@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slowly & Surely — Reiki with Laura · Fort Collins, CO</title>
+<link rel="icon" type="image/png" href="https://designmywebsitenow.com/images/favicon-merkaba.png">
+<link rel="apple-touch-icon" href="https://designmywebsitenow.com/images/favicon-merkaba.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --void: #070c10;
+    --deep: #0c1820;
+    --water: #1a3a52;
+    --river: #2a6b8a;
+    --mist: #8dbdd1;
+    --cream: #f2ede6;
+    --fog: #dce8ee;
+    --drop: #a8d4e8;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    font-weight: 300;
+    background: var(--void);
+    color: var(--cream);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  @media (hover: none) {
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+  .cursor {
+    position: fixed; top: 0; left: 0; z-index: 9999;
+    width: 8px; height: 8px;
+    background: var(--drop);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: background 0.3s;
+  }
+  .cursor-ring {
+    position: fixed; top: 0; left: 0; z-index: 9998;
+    width: 36px; height: 36px;
+    border: 1px solid rgba(168, 212, 232, 0.45);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s, height 0.25s, border-color 0.3s;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.4rem clamp(1.5rem, 5vw, 4rem);
+    transition: background 0.5s, backdrop-filter 0.5s;
+  }
+  nav.scrolled {
+    background: rgba(7, 12, 16, 0.82);
+    backdrop-filter: blur(14px);
+  }
+  .nav-left { display: flex; flex-direction: column; gap: 0.1rem; }
+  .nav-brand {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-tagline {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+    font-weight: 400;
+  }
+  .nav-right { display: flex; align-items: center; gap: 2rem; }
+  .nav-right a {
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fog);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-right a:hover { color: var(--drop); }
+  .nav-cta {
+    padding: 0.6rem 1.4rem;
+    border: 1px solid var(--river);
+    font-size: 0.68rem !important;
+    letter-spacing: 0.16em !important;
+    color: var(--drop) !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.3s, border-color 0.3s !important;
+  }
+  .nav-cta:hover { background: var(--river); border-color: var(--river); color: var(--cream) !important; }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; outline: none;
+    -webkit-appearance: none; appearance: none;
+    padding: 0;
+  }
+  .nav-toggle span {
+    display: block; width: 24px; height: 1px;
+    background: var(--cream); transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 99;
+    background: rgba(7, 12, 16, 0.97);
+    flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 1.4rem;
+    font-family: var(--serif);
+    color: var(--cream);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  .mobile-menu .m-cta {
+    margin-top: 1rem;
+    padding: 0.9rem 2.4rem;
+    border: 1px solid var(--river);
+    font-size: 0.7rem;
+    font-family: var(--sans);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--drop);
+  }
+
+  @media (max-width: 768px) {
+    .nav-right .nav-links { display: none; }
+    .nav-toggle { display: flex; }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex; align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+  }
+  .hero-bg img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    transform: scale(1.08) translateZ(0);
+    will-change: transform;
+    transition: transform 8s ease;
+  }
+  .hero-bg img.loaded { transform: scale(1.06) translateZ(0); }
+  .hero-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(
+      170deg,
+      rgba(7,12,16,0.7) 0%,
+      rgba(12,24,32,0.55) 40%,
+      rgba(26,58,82,0.45) 70%,
+      rgba(7,12,16,0.85) 100%
+    );
+  }
+
+  /* Water ripple SVG overlay */
+  .hero-ripple {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    height: 220px; pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative; z-index: 2;
+    padding: clamp(6rem, 14vw, 10rem) clamp(1.5rem, 7vw, 6rem);
+    max-width: 760px;
+  }
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--drop);
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+  }
+  .eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--drop);
+    vertical-align: middle;
+    margin-right: 0.8rem;
+    opacity: 0.7;
+  }
+  h1 {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 6rem);
+    font-weight: 300;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 1.6rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--drop);
+    font-weight: 400;
+  }
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    line-height: 1.7;
+    color: var(--fog);
+    max-width: 480px;
+    margin-bottom: 2.8rem;
+    font-weight: 300;
+  }
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    background: var(--river);
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background 0.3s;
+  }
+  .btn-primary:hover { background: #3a85a8; }
+  .btn-ghost {
+    display: inline-block;
+    padding: 0.85rem 2.2rem;
+    border: 1px solid rgba(168,212,232,0.4);
+    color: var(--drop);
+    text-decoration: none;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 400;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: border-color 0.3s, color 0.3s;
+  }
+  .btn-ghost:hover { border-color: var(--drop); color: var(--cream); }
+
+  .hero-scroll {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  }
+  .hero-scroll span {
+    font-size: 0.58rem; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--mist); opacity: 0.7;
+  }
+  .drip {
+    width: 1px; height: 40px;
+    background: linear-gradient(to bottom, var(--drop), transparent);
+    animation: drip 2.2s ease-in-out infinite;
+  }
+  @keyframes drip {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.3); opacity: 1; }
+  }
+
+  /* ── MARQUEE ── */
+  .marquee-band {
+    background: var(--water);
+    overflow: hidden;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(168,212,232,0.1);
+    border-bottom: 1px solid rgba(168,212,232,0.1);
+  }
+  .marquee-track {
+    display: flex; gap: 0;
+    animation: marquee 22s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .marquee-item {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--drop);
+    padding: 0 2.5rem;
+  }
+  .marquee-sep { color: rgba(168,212,232,0.4); }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
+
+  .section-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    color: var(--drop);
+    margin-bottom: 1.2rem;
+    font-weight: 400;
+  }
+
+  h2 {
+    font-family: var(--serif);
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 1.6rem;
+  }
+  h2 em { font-style: italic; color: var(--drop); }
+
+  h3 {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 0.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--fog);
+    font-weight: 300;
+  }
+
+  /* ── ABOUT ── */
+  .about { background: var(--deep); }
+  .about-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-img-frame {
+    width: 100%; aspect-ratio: 3/4;
+    overflow: hidden; position: relative;
+  }
+  .about-img-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center top;
+    filter: saturate(0.85);
+    transition: transform 0.8s ease;
+  }
+  .about-img-frame:hover img { transform: scale(1.03); }
+  .about-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(7,12,16,0.6) 0%, transparent 50%);
+  }
+  .cert-badge {
+    position: absolute; bottom: 2rem; left: 2rem;
+    background: rgba(7,12,16,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(168,212,232,0.2);
+    padding: 1rem 1.4rem;
+  }
+  .cert-badge p {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--drop);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .about-text { }
+  .about-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.4rem, 3vw, 2.1rem);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--drop);
+    line-height: 1.45;
+    margin-bottom: 2rem;
+    position: relative;
+    padding-left: 1.5rem;
+  }
+  .about-quote::before {
+    content: '';
+    position: absolute; left: 0; top: 0.2em;
+    width: 2px; height: 80%;
+    background: linear-gradient(to bottom, var(--river), transparent);
+  }
+  .about-body { display: flex; flex-direction: column; gap: 1.2rem; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--void); }
+  .services-inner { max-width: 1200px; margin: 0 auto; }
+  .services-header { max-width: 540px; margin-bottom: 4rem; }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+  }
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }
+  .service-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(7,12,16,0.94) 0%, rgba(7,12,16,0.6) 55%, rgba(7,12,16,0.3) 100%);
+    transition: background 0.4s;
+  }
+  .service-card:hover .service-overlay {
+    background: linear-gradient(to top, rgba(26,58,82,0.95) 0%, rgba(26,58,82,0.7) 55%, rgba(7,12,16,0.35) 100%);
+  }
+  .service-content {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 2rem;
+    z-index: 1;
+  }
+  .service-num {
+    font-size: 0.58rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--drop);
+    margin-bottom: 0.6rem;
+    font-weight: 400;
+  }
+  .service-name {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .service-name em { font-style: italic; color: var(--drop); }
+  .service-desc {
+    font-size: 0.82rem;
+    line-height: 1.65;
+    color: var(--fog);
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.4s, transform 0.4s;
+    font-weight: 300;
+  }
+  .service-card:hover .service-desc { opacity: 1; transform: none; }
+  .service-duration {
+    margin-top: 1rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+    opacity: 0;
+    transition: opacity 0.4s 0.05s;
+  }
+  .service-card:hover .service-duration { opacity: 1; }
+
+  /* ── BREATH MOMENT ── */
+  .breath {
+    background: var(--water);
+    text-align: center;
+    padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    position: relative;
+    overflow: hidden;
+  }
+  .breath::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(42,107,138,0.3) 0%, transparent 70%);
+  }
+  .breath-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .breath-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--drop);
+    margin-bottom: 2rem;
+  }
+  .breath-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.35;
+    color: var(--cream);
+    margin-bottom: 2.5rem;
+  }
+  .breath-quote em { color: var(--drop); font-weight: 400; }
+  .breath-attr {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+
+  /* Breathing orb */
+  .orb-wrap { margin: 3rem auto 0; width: 80px; height: 80px; }
+  .orb {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(168,212,232,0.35) 0%, rgba(42,107,138,0.15) 60%, transparent 100%);
+    border: 1px solid rgba(168,212,232,0.25);
+    animation: breathOrb 5s ease-in-out infinite;
+  }
+  @keyframes breathOrb {
+    0%, 100% { transform: scale(1); opacity: 0.5; }
+    50% { transform: scale(1.25); opacity: 1; }
+  }
+
+  /* ── TESTIMONIALS ── */
+  .testimonials { background: var(--deep); }
+  .testi-inner { max-width: 1100px; margin: 0 auto; }
+  .testi-header { max-width: 440px; margin-bottom: 3.5rem; }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .testi-item {
+    border-top: 1px solid rgba(168,212,232,0.15);
+    padding-top: 2rem;
+  }
+  .testi-quote {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--cream);
+    margin-bottom: 1.4rem;
+  }
+  .testi-mark {
+    font-family: var(--serif);
+    font-size: 2rem;
+    color: var(--river);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+  .testi-attr {
+    font-size: 0.62rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+
+  /* ── TRAVEL ── */
+  .travel { background: var(--void); }
+  .travel-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 6rem;
+    align-items: center;
+  }
+  .travel-img {
+    position: relative;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+  .travel-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: saturate(0.8);
+    transition: transform 0.7s ease;
+  }
+  .travel-img:hover img { transform: scale(1.04); }
+  .travel-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(7,12,16,0.3) 0%, transparent 60%);
+  }
+  .radius-badge {
+    position: absolute; top: 2rem; right: 2rem;
+    width: 90px; height: 90px;
+    border-radius: 50%;
+    background: rgba(7,12,16,0.85);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(168,212,232,0.25);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.15rem;
+  }
+  .radius-badge .num {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--drop);
+    line-height: 1;
+  }
+  .radius-badge .unit {
+    font-size: 0.52rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+  .travel-text { }
+  .travel-cta { margin-top: 2.5rem; }
+
+  /* ── CTA BAND ── */
+  .cta-band {
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
+    background: var(--water);
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute; inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1508672019048-805c876b67e2?w=1600&q=80');
+    background-size: cover; background-position: center;
+    opacity: 0.12;
+  }
+  .cta-band-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+  .cta-band h2 { margin-bottom: 1.2rem; }
+  .cta-band p { margin-bottom: 2.5rem; font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto; }
+  .cta-band .btn-primary { margin-right: 1rem; }
+  .phone-line {
+    margin-top: 2rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--mist);
+  }
+  .phone-line a {
+    color: var(--drop);
+    text-decoration: none;
+    font-family: var(--serif);
+    font-size: 1.2rem;
+    letter-spacing: 0.04em;
+    font-style: italic;
+    text-transform: none;
+    display: block;
+    margin-top: 0.4rem;
+    transition: color 0.3s;
+  }
+  .phone-line a:hover { color: var(--cream); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--void);
+    border-top: 1px solid rgba(168,212,232,0.08);
+    padding: 3rem clamp(1.5rem, 5vw, 4rem) 2rem;
+  }
+  .footer-inner {
+    max-width: 1200px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 4rem;
+    margin-bottom: 3rem;
+  }
+  .footer-brand-name {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+  .footer-brand-name em { font-style: italic; color: var(--drop); }
+  .footer-tagline {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--mist);
+    margin-bottom: 1.2rem;
+  }
+  .footer-bio { max-width: 280px; }
+  .footer-bio p { font-size: 0.88rem; line-height: 1.7; color: rgba(220,232,238,0.6); }
+  .footer-col h4 {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--drop);
+    margin-bottom: 1.2rem;
+  }
+  .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-col ul li a {
+    font-size: 0.85rem;
+    color: rgba(220,232,238,0.65);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--drop); }
+  .footer-bottom {
+    border-top: 1px solid rgba(168,212,232,0.08);
+    padding-top: 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bottom p {
+    font-size: 0.7rem;
+    color: rgba(220,232,238,0.35);
+  }
+  .footer-bottom a { color: var(--mist); text-decoration: none; }
+
+  /* ── REVEAL ── */
+  .rv {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .rv.visible { opacity: 1; transform: none; }
+  .rv-delay-1 { transition-delay: 0.1s; }
+  .rv-delay-2 { transition-delay: 0.2s; }
+  .rv-delay-3 { transition-delay: 0.3s; }
+
+  /* ── ACCESSIBILITY TOGGLE ── */
+  #a11y-toggle {
+    position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 200;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: rgba(7,12,16,0.85);
+    border: 1px solid rgba(168,212,232,0.3);
+    color: var(--drop);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(8px);
+    transition: border-color 0.3s;
+  }
+  #a11y-toggle:hover { border-color: var(--drop); }
+
+  body.a11y-mode {
+    background: #fff !important;
+    color: #000 !important;
+    cursor: auto !important;
+  }
+  body.a11y-mode nav { background: #fff !important; }
+  body.a11y-mode .about,
+  body.a11y-mode .deep,
+  body.a11y-mode .testimonials { background: #f5f5f5 !important; }
+  body.a11y-mode h1, body.a11y-mode h2, body.a11y-mode h3,
+  body.a11y-mode p, body.a11y-mode a { color: #000 !important; }
+  body.a11y-mode .nav-brand, body.a11y-mode .nav-right a { color: #000 !important; }
+  body.a11y-mode .cursor, body.a11y-mode .cursor-ring { display: none; }
+
+  /* ── WATER DRIP ANIMATION ── */
+  @keyframes dropFall {
+    0% { transform: translateY(0) scaleY(1); opacity: 0.9; }
+    80% { transform: translateY(40px) scaleY(1.2); opacity: 0.6; }
+    100% { transform: translateY(48px) scaleY(0.6); opacity: 0; }
+  }
+  .water-drops {
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .drop-svg {
+    position: absolute;
+    opacity: 0;
+    animation: dropFall linear infinite;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .about-img-frame { aspect-ratio: 4/3; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-card { aspect-ratio: 16/9; }
+    .testi-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .travel-inner { grid-template-columns: 1fr; gap: 3rem; }
+    .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-ctas { flex-direction: column; }
+    .services-grid { grid-template-columns: 1fr; }
+    .service-desc { opacity: 1; transform: none; }
+    .service-duration { opacity: 1; }
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Nav -->
+<nav id="mainNav">
+  <div class="nav-left">
+    <a href="#" class="nav-brand">Slowly & Surely</a>
+    <span class="nav-tagline">Reiki · Fort Collins, CO</span>
+  </div>
+  <div class="nav-right">
+    <div class="nav-links" style="display:flex;gap:2rem;align-items:center;">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#travel">Travel Reiki</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact" class="nav-cta">Book a Session</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMobile()">About</a>
+  <a href="#services" onclick="closeMobile()">Services</a>
+  <a href="#travel" onclick="closeMobile()">Travel Reiki</a>
+  <a href="#testimonials" onclick="closeMobile()">Testimonials</a>
+  <a href="#contact" class="m-cta" onclick="closeMobile()">Book a Session</a>
+</div>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <img
+      src="https://images.unsplash.com/photo-1551621962-b8f40dee2f2c?q=80&w=1920&auto=format&fit=crop"
+      alt="Forest light, stillness"
+      id="heroBg"
+      fetchpriority="high"
+    >
+    <div class="hero-overlay"></div>
+  </div>
+
+  <svg class="hero-ripple" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M0,120 C240,80 480,160 720,120 C960,80 1200,160 1440,120 L1440,220 L0,220 Z" fill="rgba(7,12,16,0.95)"/>
+    <path d="M0,150 C360,110 720,170 1080,130 C1260,110 1380,145 1440,150 L1440,220 L0,220 Z" fill="rgba(7,12,16,1)"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="eyebrow rv">Reiki with Laura · Fort Collins, Colorado</div>
+    <h1 class="rv rv-delay-1">
+      Let it move<br>
+      like <em>water.</em>
+    </h1>
+    <p class="hero-sub rv rv-delay-2">
+      You don't have to hold everything together. Slowly and Surely is a space to pause — to breathe, to feel, and to remember that you are life and you are love.
+    </p>
+    <div class="hero-ctas rv rv-delay-3">
+      <a href="#contact" class="btn-primary">Book a Session</a>
+      <a href="#about" class="btn-ghost">Meet Laura</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="drip"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-band">
+  <div class="marquee-track">
+    <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Merkaba <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Fort Collins, CO <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">1-Hour Sessions <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">90-Minute Sessions <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Merkaba <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">Fort Collins, CO <span class="marquee-sep">✦</span></span>
+    <span class="marquee-item">1-Hour Sessions <span class="marquee-sep">·</span></span>
+    <span class="marquee-item">90-Minute Sessions <span class="marquee-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap rv">
+      <div class="about-img-frame">
+        <img
+          src="https://images.unsplash.com/photo-1604908506732-46bf709bf6b1?q=80&w=800&auto=format&fit=crop"
+          alt="Laura — Reiki Practitioner"
+        >
+        <div class="about-img-overlay"></div>
+      </div>
+      <div class="cert-badge">
+        <p>
+          Usui Reiki · Roku Fire<br>
+          Merkaba · Water<br>
+          Certified Practitioner
+        </p>
+      </div>
+    </div>
+    <div class="about-text">
+      <p class="section-eyebrow rv">Meet Laura</p>
+      <h2 class="rv rv-delay-1">She found the <em>river</em><br>inside herself.</h2>
+      <blockquote class="about-quote rv rv-delay-2">
+        "It's peaceful to not want to crawl out of your own skin."
+      </blockquote>
+      <div class="about-body rv rv-delay-3">
+        <p>
+          Laura has been working through chaos her whole life. A shattered world. Trauma she didn't want to become bitter from — she wanted to let it go. In 2020, she found Reiki and began her self-healing journey.
+        </p>
+        <p>
+          The distinction between spirit and the physical world became her anchor — knowing there was more out there than the physical body she was in that had been in pain for so long. She found herself rooted to Gaia. Grounded in something she hadn't felt in years.
+        </p>
+        <p>
+          Now she brings that same invitation to you. A pause. A breath. A remembering that you are both life and love.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="services" id="services">
+  <div class="services-inner">
+    <div class="services-header">
+      <p class="section-eyebrow rv">What Laura Offers</p>
+      <h2 class="rv rv-delay-1">Sacred <em>sessions</em><br>for your return.</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card rv"
+        style="background-image: url('https://images.unsplash.com/photo-1562026700-3425431ecb5b?q=80&w=800&auto=format&fit=crop')">
+        <div class="service-overlay"></div>
+        <div class="service-content">
+          <span class="service-num">01</span>
+          <div class="service-name">Standard <em>Reiki</em></div>
+          <p class="service-desc">A full energy healing session to release what no longer serves you. Settle in, breathe, and let the energy move — slowly, and surely.</p>
+          <span class="service-duration">60 minutes</span>
+        </div>
+      </div>
+      <div class="service-card rv rv-delay-1"
+        style="background-image: url('https://images.unsplash.com/photo-1629275622835-f42d081fe666?q=80&w=800&auto=format&fit=crop')">
+        <div class="service-overlay"></div>
+        <div class="service-content">
+          <span class="service-num">02</span>
+          <div class="service-name">Deep <em>Flow</em></div>
+          <p class="service-desc">An extended session for those ready to go deeper. More time to settle, more time to shift. Perfect for those working through longstanding tension or trauma.</p>
+          <span class="service-duration">90 minutes</span>
+        </div>
+      </div>
+      <div class="service-card rv rv-delay-2"
+        style="background-image: url('https://images.unsplash.com/photo-1605552981700-68484762d021?q=80&w=800&auto=format&fit=crop')">
+        <div class="service-overlay"></div>
+        <div class="service-content">
+          <span class="service-num">03</span>
+          <div class="service-name">Travel <em>Reiki</em></div>
+          <p class="service-desc">Laura comes to you — your home, your space, your comfort. Available within a one-hour radius of Fort Collins. Healing where you are.</p>
+          <span class="service-duration">60 or 90 min · Mobile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breath Moment -->
+<div class="breath">
+  <div class="breath-inner">
+    <p class="breath-label rv">A moment</p>
+    <blockquote class="breath-quote rv rv-delay-1">
+      "Notice that you are <em>life.</em><br>Notice that you are <em>love.</em>"
+    </blockquote>
+    <p class="breath-attr rv rv-delay-2">— The invitation at the heart of every session</p>
+    <div class="orb-wrap rv rv-delay-3">
+      <div class="orb"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Testimonials -->
+<section class="testimonials" id="testimonials">
+  <div class="testi-inner">
+    <div class="testi-header">
+      <p class="section-eyebrow rv">What Clients Say</p>
+      <h2 class="rv rv-delay-1">Felt in the <em>body.</em></h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-item rv">
+        <div class="testi-mark">"</div>
+        <blockquote class="testi-quote">I didn't realize how much I was carrying until Laura's session. I left feeling like I'd set down something heavy I'd been holding for years.</blockquote>
+        <p class="testi-attr">⬡ Placeholder — replace with real testimonial</p>
+      </div>
+      <div class="testi-item rv rv-delay-1">
+        <div class="testi-mark">"</div>
+        <blockquote class="testi-quote">The travel option was everything for me. Being in my own space made such a difference — Laura just moved through the room like water.</blockquote>
+        <p class="testi-attr">⬡ Placeholder — replace with real testimonial</p>
+      </div>
+      <div class="testi-item rv rv-delay-2">
+        <div class="testi-mark">"</div>
+        <blockquote class="testi-quote">Laura has this grounded, quiet energy that just makes you feel safe. By the end I actually remembered what it felt like to breathe.</blockquote>
+        <p class="testi-attr">⬡ Placeholder — replace with real testimonial</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Travel Reiki -->
+<section class="travel" id="travel">
+  <div class="travel-inner">
+    <div class="travel-img rv">
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80"
+        alt="Colorado landscape, travel"
+      >
+      <div class="travel-img-overlay"></div>
+      <div class="radius-badge">
+        <span class="num">1</span>
+        <span class="unit">hr radius</span>
+      </div>
+    </div>
+    <div class="travel-text">
+      <p class="section-eyebrow rv">Travel Reiki</p>
+      <h2 class="rv rv-delay-1">Healing that comes <em>to you.</em></h2>
+      <p class="rv rv-delay-2">Laura travels locally — within a one-hour radius of Fort Collins, Colorado. If getting somewhere feels like one more thing to carry, this is your option. She brings everything needed for a full session directly to your door.</p>
+      <p class="rv rv-delay-3" style="margin-top:1.2rem;">Whether you're recovering, resting, or simply need Reiki to meet you where you are — Laura's there.</p>
+      <div class="travel-cta rv rv-delay-3">
+        <a href="#contact" class="btn-primary">Request Travel Reiki</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Band -->
+<div class="cta-band" id="contact">
+  <div class="cta-band-inner">
+    <p class="section-eyebrow rv">Begin Here</p>
+    <h2 class="rv rv-delay-1">Ready to let <em>go?</em></h2>
+    <p class="rv rv-delay-2">Sessions are available in person in Fort Collins and via Travel Reiki within a one-hour radius. Reach out to book your time.</p>
+    <div class="rv rv-delay-3">
+      <div class="phone-line">
+        Call or text to book
+        <a href="tel:9706998040">(970) 699-8040</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-bio">
+      <div class="footer-brand-name">Slowly <em>&</em> Surely</div>
+      <div class="footer-tagline">Reiki with Laura · Fort Collins, CO</div>
+      <p>A space to pause, breathe, and return to yourself — slowly, and surely.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="#about">About Laura</a></li>
+        <li><a href="#services">Sessions</a></li>
+        <li><a href="#travel">Travel Reiki</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Book</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:9706998040">(970) 699-8040</a></li>
+        <li><a href="#contact">Fort Collins, CO</a></li>
+        <li><a href="#travel">Travel · 1 hr radius</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Slowly & Surely. All rights reserved.</p>
+    <p>Built by <a href="https://designmywebsitenow.com" target="_blank">Merkaba Web Studio</a></p>
+  </div>
+</footer>
+
+<!-- A11y Toggle -->
+<button id="a11y-toggle" title="Toggle accessibility mode" aria-label="Accessibility mode">◐</button>
+
+<script>
+// Cursor
+if (!window.matchMedia('(hover: none)').matches) {
+  const cur = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0, mx = 0, my = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px'; });
+  function animateRing() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) *.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+}
+
+// Nav scroll
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+}, { passive: true });
+
+// Mobile menu
+const toggle = document.getElementById('navToggle');
+const menu = document.getElementById('mobileMenu');
+toggle.addEventListener('click', () => menu.classList.toggle('open'));
+function closeMobile() { menu.classList.remove('open'); }
+
+// Hero image parallax + load
+const heroBg = document.getElementById('heroBg');
+const onHeroLoad = () => requestAnimationFrame(() => heroBg.classList.add('loaded'));
+heroBg.addEventListener('load', onHeroLoad);
+if (heroBg.complete) onHeroLoad();
+window.addEventListener('scroll', () => {
+  const offset = Math.min(window.scrollY * 0.04, window.innerHeight * 0.055);
+  heroBg.style.transform = `scale(1.06) translateY(-${offset}px) translateZ(0)`;
+}, { passive: true });
+
+// Scroll reveal
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+}, { threshold: 0.12 });
+document.querySelectorAll('.rv').forEach(el => {
+  el.classList.remove('visible');
+  io.observe(el);
+});
+// Ensure elements visible if JS delayed
+setTimeout(() => {
+  document.querySelectorAll('.rv').forEach(el => {
+    const rect = el.getBoundingClientRect();
+    if (rect.top < window.innerHeight) el.classList.add('visible');
+  });
+}, 100);
+
+// A11y
+const a11yBtn = document.getElementById('a11y-toggle');
+const a11yKey = 'slowly-surely-a11y';
+if (localStorage.getItem(a11yKey) === '1') document.body.classList.add('a11y-mode');
+a11yBtn.addEventListener('click', () => {
+  document.body.classList.toggle('a11y-mode');
+  localStorage.setItem(a11yKey, document.body.classList.contains('a11y-mode') ? '1' : '0');
+});
+</script>
+</body>
+</html>
