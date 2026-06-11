@@ -162,6 +162,12 @@
   .hero-bg {
     position: absolute; inset: 0;
   }
+  .hero-bg video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover; object-position: center;
+    z-index: 1;
+  }
   .hero-bg img {
     position: absolute; inset: 0;
     width: 100%; height: 100%;
@@ -169,8 +175,10 @@
     transform: scale(1.08) translateZ(0);
     will-change: transform;
     transition: transform 8s ease;
+    z-index: 0;
   }
   .hero-bg img.loaded { transform: scale(1.06) translateZ(0); }
+  .hero-overlay { z-index: 2; }
   .hero-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(
@@ -827,6 +835,9 @@
       id="heroBg"
       fetchpriority="high"
     >
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="hero.mp4" type="video/mp4">
+    </video>
     <div class="hero-overlay"></div>
   </div>
 
