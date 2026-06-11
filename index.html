@@ -190,10 +190,11 @@
     );
   }
 
-  /* Water ripple SVG overlay */
-  .hero-ripple {
+  /* Soft gradient wave transition */
+  .hero-wave {
     position: absolute; bottom: 0; left: 0; right: 0;
-    height: 220px; pointer-events: none;
+    height: 180px; pointer-events: none; z-index: 3;
+    background: linear-gradient(to bottom, transparent 0%, var(--deep) 100%);
   }
 
   .hero-content {
@@ -290,32 +291,6 @@
     50% { transform: scaleY(1.3); opacity: 1; }
   }
 
-  /* ── MARQUEE ── */
-  .marquee-band {
-    background: var(--water);
-    overflow: hidden;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(168,212,232,0.1);
-    border-bottom: 1px solid rgba(168,212,232,0.1);
-  }
-  .marquee-track {
-    display: flex; gap: 0;
-    animation: marquee 22s linear infinite;
-    white-space: nowrap;
-    width: max-content;
-  }
-  .marquee-item {
-    font-size: 0.65rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--drop);
-    padding: 0 2.5rem;
-  }
-  .marquee-sep { color: rgba(168,212,232,0.4); }
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
 
   /* ── SECTIONS ── */
   section { padding: clamp(4rem, 10vw, 8rem) clamp(1.5rem, 5vw, 4rem); }
@@ -485,18 +460,24 @@
 
   /* ── BREATH MOMENT ── */
   .breath {
-    background: var(--water);
     text-align: center;
     padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
     position: relative;
     overflow: hidden;
   }
-  .breath::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse 70% 60% at 50% 50%, rgba(42,107,138,0.3) 0%, transparent 70%);
+  .breath-parallax-bg {
+    position: absolute; inset: -30%;
+    background-image: url('client-assets/ecd4b950-4bfc-4cde-8c33-e6563939f47d.jpg');
+    background-size: cover; background-position: center;
+    will-change: transform;
+    z-index: 0;
   }
-  .breath-inner { position: relative; z-index: 1; max-width: 700px; margin: 0 auto; }
+  .breath-parallax-overlay {
+    position: absolute; inset: 0;
+    background: rgba(12, 24, 32, 0.82);
+    z-index: 1;
+  }
+  .breath-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
   .breath-label {
     font-size: 0.62rem;
     letter-spacing: 0.28em;
@@ -841,10 +822,7 @@
     <div class="hero-overlay"></div>
   </div>
 
-  <svg class="hero-ripple" viewBox="0 0 1440 220" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M0,120 C240,80 480,160 720,120 C960,80 1200,160 1440,120 L1440,220 L0,220 Z" fill="rgba(7,12,16,0.95)"/>
-    <path d="M0,150 C360,110 720,170 1080,130 C1260,110 1380,145 1440,150 L1440,220 L0,220 Z" fill="rgba(7,12,16,1)"/>
-  </svg>
+  <div class="hero-wave"></div>
 
   <div class="hero-content">
     <div class="eyebrow rv">Reiki with Laura · Fort Collins, Colorado</div>
@@ -867,27 +845,6 @@
   </div>
 </section>
 
-<!-- Marquee -->
-<div class="marquee-band">
-  <div class="marquee-track">
-    <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Fort Collins, CO <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">1-Hour Sessions <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">90-Minute Sessions <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Fort Collins, CO <span class="marquee-sep">✦</span></span>
-    <span class="marquee-item">1-Hour Sessions <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">90-Minute Sessions <span class="marquee-sep">✦</span></span>
-  </div>
-</div>
 
 <!-- About -->
 <section class="about" id="about">
@@ -958,7 +915,7 @@
         </div>
       </div>
       <div class="service-card rv rv-delay-2"
-        style="background-image: url('https://images.unsplash.com/photo-1605552981700-68484762d021?q=80&w=800&auto=format&fit=crop')">
+        style="background-image: url('client-assets/98694c35-ff20-4712-94e6-be16fb89c488.jpg')">
         <div class="service-overlay"></div>
         <div class="service-content">
           <span class="service-num">03</span>
@@ -973,6 +930,8 @@
 
 <!-- Breath Moment -->
 <div class="breath">
+  <div class="breath-parallax-bg" id="breathBg"></div>
+  <div class="breath-parallax-overlay"></div>
   <div class="breath-inner">
     <p class="breath-label rv">A moment</p>
     <blockquote class="breath-quote rv rv-delay-1">
@@ -1017,8 +976,8 @@
   <div class="travel-inner">
     <div class="travel-img rv">
       <img
-        src="client-assets/98694c35-ff20-4712-94e6-be16fb89c488.jpg"
-        alt="Laura — Travel Reiki"
+        src="client-assets/ecd4b950-4bfc-4cde-8c33-e6563939f47d.jpg"
+        alt="Colorado — Travel Reiki"
       >
       <div class="travel-img-overlay"></div>
       <div class="radius-badge">
@@ -1125,6 +1084,17 @@ window.addEventListener('scroll', () => {
   const offset = Math.min(window.scrollY * 0.04, window.innerHeight * 0.055);
   heroBg.style.transform = `scale(1.06) translateY(-${offset}px) translateZ(0)`;
 }, { passive: true });
+
+// Breath section parallax
+const breathBg = document.getElementById('breathBg');
+if (breathBg) {
+  window.addEventListener('scroll', () => {
+    const section = breathBg.closest('.breath');
+    const rect = section.getBoundingClientRect();
+    const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * 0.2;
+    breathBg.style.transform = `translateY(${offset}px)`;
+  }, { passive: true });
+}
 
 // Scroll reveal
 const io = new IntersectionObserver(entries => {
