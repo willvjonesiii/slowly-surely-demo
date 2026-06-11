@@ -463,14 +463,10 @@
     text-align: center;
     padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 5vw, 4rem);
     position: relative;
-    overflow: hidden;
-  }
-  .breath-parallax-bg {
-    position: absolute; inset: -30%;
     background-image: url('client-assets/ecd4b950-4bfc-4cde-8c33-e6563939f47d.jpg');
-    background-size: cover; background-position: center;
-    will-change: transform;
-    z-index: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
   .breath-parallax-overlay {
     position: absolute; inset: 0;
@@ -930,7 +926,6 @@
 
 <!-- Breath Moment -->
 <div class="breath">
-  <div class="breath-parallax-bg" id="breathBg"></div>
   <div class="breath-parallax-overlay"></div>
   <div class="breath-inner">
     <p class="breath-label rv">A moment</p>
@@ -1084,17 +1079,6 @@ window.addEventListener('scroll', () => {
   const offset = Math.min(window.scrollY * 0.04, window.innerHeight * 0.055);
   heroBg.style.transform = `scale(1.06) translateY(-${offset}px) translateZ(0)`;
 }, { passive: true });
-
-// Breath section parallax
-const breathBg = document.getElementById('breathBg');
-if (breathBg) {
-  window.addEventListener('scroll', () => {
-    const section = breathBg.closest('.breath');
-    const rect = section.getBoundingClientRect();
-    const offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * 0.2;
-    breathBg.style.transform = `translateY(${offset}px)`;
-  }, { passive: true });
-}
 
 // Scroll reveal
 const io = new IntersectionObserver(entries => {
