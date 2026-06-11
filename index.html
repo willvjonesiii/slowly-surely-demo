@@ -513,18 +513,17 @@
     color: var(--mist);
   }
 
-  /* Breathing orb */
-  .orb-wrap { margin: 3rem auto 0; width: 80px; height: 80px; }
-  .orb {
-    width: 80px; height: 80px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(168,212,232,0.35) 0%, rgba(42,107,138,0.15) 60%, transparent 100%);
-    border: 1px solid rgba(168,212,232,0.25);
+  /* Merkaba pulse */
+  .orb-wrap { margin: 3rem auto 0; width: 90px; height: 90px; }
+  .merkaba-pulse {
+    width: 90px; height: 90px;
     animation: breathOrb 5s ease-in-out infinite;
+    filter: brightness(0) invert(1) opacity(0.7);
   }
+  .merkaba-pulse:hover { filter: brightness(0) invert(1) opacity(1); }
   @keyframes breathOrb {
     0%, 100% { transform: scale(1); opacity: 0.5; }
-    50% { transform: scale(1.25); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 1; }
   }
 
   /* ── TESTIMONIALS ── */
@@ -862,7 +861,6 @@
   <div class="marquee-track">
     <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Merkaba <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
     <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
@@ -871,7 +869,6 @@
     <span class="marquee-item">90-Minute Sessions <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Usui Reiki <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Roku Fire <span class="marquee-sep">·</span></span>
-    <span class="marquee-item">Merkaba <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Water Attunement <span class="marquee-sep">·</span></span>
     <span class="marquee-item">Travel Reiki <span class="marquee-sep">✦</span></span>
     <span class="marquee-item">Energy Healing <span class="marquee-sep">·</span></span>
@@ -895,7 +892,7 @@
       <div class="cert-badge">
         <p>
           Usui Reiki · Roku Fire<br>
-          Merkaba · Water<br>
+          Water Attunement<br>
           Certified Practitioner
         </p>
       </div>
@@ -972,7 +969,7 @@
     </blockquote>
     <p class="breath-attr rv rv-delay-2">— The invitation at the heart of every session</p>
     <div class="orb-wrap rv rv-delay-3">
-      <div class="orb"></div>
+      <img src="https://designmywebsitenow.com/images/favicon-merkaba.png" alt="" class="merkaba-pulse" aria-hidden="true">
     </div>
   </div>
 </div>
