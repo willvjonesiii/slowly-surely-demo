@@ -156,8 +156,12 @@
   }
 
   @media (max-width: 768px) {
-    .nav-right .nav-links { display: none; }
+    .nav-links { display: none !important; }
     .nav-toggle { display: flex; }
+    .nav-brand { font-size: 1rem; }
+    .nav-tagline { display: none; }
+    nav { padding: 1rem 1.25rem; }
+    .nav-toggle { min-width: 44px; min-height: 44px; justify-content: center; align-items: center; }
   }
 
   /* ── HERO ── */
